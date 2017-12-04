@@ -10,11 +10,12 @@ class Nqueens
     ~Nqueens();
     bool checkSafe(int, int);
     void solve();
-    bool solveRecurse(int);
     void print();
 
   private:
-    std::vector< std::vector<int> > grid;
+    bool solveRecurse(int);
+
+    std::vector<std::vector<int> > grid;
     int size;
 };
 #endif

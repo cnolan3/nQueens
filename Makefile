@@ -14,7 +14,13 @@ LFLAGS =
 COMP = comp.err
 LINK = link.err
 LIB = -lncurses -lpanel
-DEBUG = 0
+UI =
+
+ifeq ($(UI), curses)
+	CURSESUI = -DCURSESUI
+else
+	CURSESUI = -DCLI
+endif
 
 .PHONY: all clean $(BPATH)
 
@@ -25,7 +31,7 @@ $(EXE):	$(OBJ)
 -include $(DEP)
 
 $(BPATH)/%.o: %.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CURSESUI) -c $< -o $@
 
 $(BPATH):
 	@mkdir -p $@

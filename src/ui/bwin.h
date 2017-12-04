@@ -11,6 +11,7 @@ public:
     BWin();
     ~BWin();
 
+    void redraw();
 private:
     WINDOW* m_win; 
     Board* m_board;    
