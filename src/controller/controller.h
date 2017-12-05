@@ -24,6 +24,7 @@ private:
     bool running;
     View* m_view;
     Nqueens* m_model;
+    int m_speed;
 };
 
 #endif

@@ -63,6 +63,8 @@ Controller::Controller(int argc, char* argv[])
     running = true;
 
     m_view->intro(initSize);
+
+    m_speed = 10;
 }
 
 Controller::~Controller()
@@ -121,7 +123,7 @@ void Controller::mainLoop()
                 #ifdef CURSESUI
                     m_view->update_board(m_model->queens(), m_model->stat());
                     m_view->update_view(m_model->curCol(), m_model->curStep());
-                    usleep(100000);
+                    usleep(1000 * m_speed);
                 #endif
                 }
 
@@ -136,6 +138,19 @@ void Controller::mainLoop()
                 m_view->init_board(size);
                 m_view->update_board(m_model->queens(), m_model->stat());
                 m_view->update_view(m_model->curCol(), m_model->curStep()); 
+            }
+            else if(*it == "speed") {
+                it++;
+                if(it == sv.end())
+                    m_view->invalid_command();
+                else {
+                    int speed = atoi((*it).c_str());
+
+                    if(speed < 0)
+                        m_view->invalid_command();
+                    else
+                        m_speed = speed; 
+                }
             }
             else if(*it == "help" || *it == "h")
                 m_view->help();

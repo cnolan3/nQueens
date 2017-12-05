@@ -121,6 +121,8 @@ std::string BWin::get_input()
     getmaxyx(stdscr, h, w);
 
     attron(COLOR_PAIR(3));
+    curs_set(1);
+
     for(int i = 0; i < w; i++) {
         mvprintw(h - 2, i, " ");
     }
@@ -134,6 +136,7 @@ std::string BWin::get_input()
     getstr(s);
 
     attroff(COLOR_PAIR(3));
+    curs_set(0);
 
     return std::string(s);
 }
