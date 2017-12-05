@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 #include "bwin.h"
-#include "board.h"
+#include "../board.h"
 
 BWin::BWin()
 {

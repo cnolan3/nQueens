@@ -12,6 +12,7 @@ public:
         QUEEN
     };
 
+    void reset();
     void setPiece(int x, int y, piece p);
     piece getPiece(int c, int y);
     

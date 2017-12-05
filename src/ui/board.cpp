@@ -15,6 +15,15 @@ Board::~Board()
 
 }
 
+void Board::reset()
+{
+    for(int i = 0; i < m_height; i++) {
+        for(int j = 0; j < m_width; j++) {
+            m_board[i][j] = EMPTY;  
+        }
+    }
+}
+
 void Board::setPiece(int x, int y, piece p)
 {
     m_board[y][x] = p;
