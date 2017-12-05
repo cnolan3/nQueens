@@ -26,7 +26,7 @@ $ make UI=curses
 ### CLI
 ```
 'help', 'h'        list commands
-'quit', 'q'        quit program\n
+'quit', 'q'        quit program
 'reset'            reset board
 'set NUM'          create new NUMxNUM board
 'run', 'r'         run from current point until a solution is found
