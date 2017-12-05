@@ -13,13 +13,15 @@ public:
     Cliview();
 
     std::vector<string> get_command();
-    void update_view();
+    void update_view(int curCol);
     void update_board(int* board, status modelStat);
     void init_board(int size);
-    void unknown_command();
+    void invalid_command();
+    void intro(int size);
+    void help();
 private:
 
-    void print_board();
+    void print_board(int curCol);
 
     Board* m_board; 
 

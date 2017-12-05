@@ -11,7 +11,8 @@ public:
 
     int size();
 
-    void step();               // take next step in simulation
+    int step();               // take next step in simulation
+    int curCol();
     void print();
 
     int* queens();             // return positions of queens    

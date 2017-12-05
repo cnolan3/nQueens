@@ -1,5 +1,7 @@
 *.o
-./build/
-./build/*
+build/
+build/*
 
 *.err
+
+nqueens

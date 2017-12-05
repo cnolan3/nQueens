@@ -29,9 +29,9 @@ std::vector<string> Cliview::get_command()
     return sv;
 }
 
-void Cliview::update_view()
+void Cliview::update_view(int curCol)
 {
-    print_board(); 
+    print_board(curCol); 
 }
 
 void Cliview::update_board(int* board, status modelStat)
@@ -48,16 +48,40 @@ void Cliview::update_board(int* board, status modelStat)
 
 void Cliview::init_board(int size)
 {
+    if(m_board)
+        delete m_board;
+
     m_board = new Board(size, size);
 }
 
-void Cliview::unknown_command()
+void Cliview::invalid_command()
 {
-    cout << "unknown command" << endl;
+    cout << "invalid command" << endl;
 }
 
-void Cliview::print_board()
+void Cliview::intro(int size)
 {
+    cout << size << "x" << size << " board created" << endl;
+    cout << endl;
+    cout << "enter 'help' or 'h' for a list of commands" << endl;
+}
+
+void Cliview::help()
+{
+    cout << "'quit', 'q'      quit program" << endl;
+    cout << "'reset', 'r'     reset the current board" << endl;
+    cout << "'set NUM'        creates new board of size NUM" << endl;
+    cout << "'step', 's'      step into next iteration" << endl;
+    cout << "'print', 'p'     print current board" << endl;
+}
+
+void Cliview::print_board(int curCol)
+{
+    for(int i = 0; i < curCol; i++) {
+        cout << "    ";
+    }
+    cout << "[C] " << endl;
+
     for(int i = 0; i < m_board->height(); i++) {
         for(int j = 0; j < m_board->width(); j++) {
             if(m_board->getPiece(j, i) == Board::EMPTY)
@@ -68,6 +92,7 @@ void Cliview::print_board()
         cout << endl;
     }
 
+    cout << "status: ";
     switch(m_modelStat) {
     case RUNNING:
         cout << "RUNNING" << endl;

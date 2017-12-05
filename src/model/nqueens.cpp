@@ -53,17 +53,14 @@ int Nqueens::size()
 
 /**
  * take next step in algorithm
+ *
+ * @return    index of current column
 **/
-void Nqueens::step()
+int Nqueens::step()
 {
-    // update algorithm status
+    if(m_status != RUNNING)
+        return m_curCol;
 
-    // place queen in next open space
-    /*
-    int i = m_queens[m_curCol] + 1;
-
-    remove(m_curCol);
-    */
     int i = m_last;
     while(i < m_size) {
         if(m_board[m_curCol][i] == EMPTY) {
@@ -95,8 +92,23 @@ void Nqueens::step()
             m_status = FINISHED;
         }
     }
+
+    return m_curCol;
 }
 
+/**
+ * get current column
+ *
+ * @return    current column
+**/
+int Nqueens::curCol()
+{
+    return m_curCol;
+}
+
+/**
+ * print contents of board for debugging
+**/
 void Nqueens::print()
 {
     cout << "step, col: " << m_curCol << endl;
@@ -172,8 +184,9 @@ void Nqueens::place(int x, int y)
 **/
 void Nqueens::remove(int col)
 {
-    if(col >= m_size || col < 0)
-        cerr << "Nqueens remove error: col out of bounds" << endl;
+    if(col >= m_size || col < 0) {
+        return;
+    }
 
     if(m_queens[col] < 0)
         return;

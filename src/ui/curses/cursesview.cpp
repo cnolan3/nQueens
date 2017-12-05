@@ -7,7 +7,7 @@ std::vector<string> Cursesview::get_command()
     return sv;
 }
 
-void Cursesview::update_view()
+void Cursesview::update_view(int curCol)
 {
 
 }
@@ -22,7 +22,12 @@ void Cursesview::init_board(int size)
 
 }
 
-void Cursesview::unknown_command()
+void Cursesview::invalid_command()
+{
+
+}
+
+void Cursesview::intro(int size)
 {
 
 }

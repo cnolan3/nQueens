@@ -7,7 +7,7 @@ class Nqueens;
 class Controller
 {
 public:
-    Controller();
+    Controller(int initSize);
     ~Controller();
 
     void mainLoop();
