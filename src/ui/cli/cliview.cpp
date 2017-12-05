@@ -93,7 +93,7 @@ void Cliview::print_board(int curCol, int curStep)
     for(int i = 0; i < m_board->height(); i++) {
         for(int j = 0; j < m_board->width(); j++) {
             if(m_board->getPiece(j, i) == Board::EMPTY)
-                cout << "[X] ";
+                cout << "[ ] ";
             else if(m_board->getPiece(j, i) == Board::QUEEN)
                 cout << "[Q] ";
         }
