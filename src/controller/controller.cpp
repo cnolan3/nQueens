@@ -28,52 +28,63 @@ Controller::~Controller()
 
 void Controller::mainLoop()
 {
+    std::vector<string> sv;
+    std::vector<string>::iterator it;
+
     while(running) {
-        std::vector<string> sv;
-        std::vector<string>::iterator it;
 
         sv = m_view->get_command();
 
         it = sv.begin();
 
-        if(*it == "quit" || *it == "q") 
-            running = false;
-        else if(*it == "print" || *it == "p")
-            m_view->update_view(m_model->curCol());
-        else if(*it == "step" || *it == "s") {
-            int curCol = m_model->step();
-            m_view->update_board(m_model->queens(), m_model->stat());
-            m_view->update_view(curCol);
-        }
-        else if(*it == "set") {
-            it++;
-            if(it == sv.end()) 
-                m_view->invalid_command();
-            else {
-                int size = atoi((*it).c_str());
-
-                if(size < 1)
+        if(it != sv.end()) {
+            if(*it == "quit" || *it == "q") 
+                running = false;
+            else if(*it == "print" || *it == "p")
+                m_view->update_view(m_model->curCol(), m_model->curStep());
+            else if(*it == "step" || *it == "s") {
+                m_model->step();
+                m_view->update_board(m_model->queens(), m_model->stat());
+                m_view->update_view(m_model->curCol(), m_model->curStep());
+            }
+            else if(*it == "set") {
+                it++;
+                if(it == sv.end()) 
                     m_view->invalid_command();
                 else {
+                    int size = atoi((*it).c_str());
 
-                    delete m_model;
-                    m_model = new Nqueens(size);
-                    m_view->init_board(size);
+                    if(size < 1)
+                        m_view->invalid_command();
+                    else {
 
-                    m_view->update_board(m_model->queens(), m_model->stat());
+                        delete m_model;
+                        m_model = new Nqueens(size);
+                        m_view->init_board(size);
+
+                        m_view->update_board(m_model->queens(), m_model->stat());
+                    }
                 }
             }
-        }
-        else if(*it == "reset" || *it == "r") {
-            int size = m_model->size();
+            else if(*it == "run" || *it == "r") {
+                while(m_model->stat() == RUNNING) {
+                    m_model->step(); 
+                }
 
-            delete m_model;
-            m_model = new Nqueens(size);
-            m_view->init_board(size);
+                m_view->update_board(m_model->queens(), m_model->stat());
+                m_view->update_view(m_model->curCol(), m_model->curStep());
+            }
+            else if(*it == "reset") {
+                int size = m_model->size();
+
+                delete m_model;
+                m_model = new Nqueens(size);
+                m_view->init_board(size);
+            }
+            else if(*it == "help" || *it == "h")
+                m_view->help();
+            else 
+                m_view->invalid_command();
         }
-        else if(*it == "help" || *it == "h")
-            m_view->help();
-        else 
-            m_view->invalid_command();
     }
 }

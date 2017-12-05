@@ -7,7 +7,7 @@ std::vector<string> Cursesview::get_command()
     return sv;
 }
 
-void Cursesview::update_view(int curCol)
+void Cursesview::update_view(int curCol, int curStep)
 {
 
 }

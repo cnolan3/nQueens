@@ -29,9 +29,9 @@ std::vector<string> Cliview::get_command()
     return sv;
 }
 
-void Cliview::update_view(int curCol)
+void Cliview::update_view(int curCol, int curStep)
 {
-    print_board(curCol); 
+    print_board(curCol, curStep); 
 }
 
 void Cliview::update_board(int* board, status modelStat)
@@ -56,7 +56,7 @@ void Cliview::init_board(int size)
 
 void Cliview::invalid_command()
 {
-    cout << "invalid command" << endl;
+    cout << "invalid command, use 'help' to list commands" << endl;
 }
 
 void Cliview::intro(int size)
@@ -69,13 +69,14 @@ void Cliview::intro(int size)
 void Cliview::help()
 {
     cout << "'quit', 'q'      quit program" << endl;
-    cout << "'reset', 'r'     reset the current board" << endl;
+    cout << "'reset'          reset the current board" << endl;
     cout << "'set NUM'        creates new board of size NUM" << endl;
+    cout << "'run', 'r'       run from current point, only prints result" << endl;
     cout << "'step', 's'      step into next iteration" << endl;
     cout << "'print', 'p'     print current board" << endl;
 }
 
-void Cliview::print_board(int curCol)
+void Cliview::print_board(int curCol, int curStep)
 {
     for(int i = 0; i < curCol; i++) {
         cout << "    ";
@@ -91,6 +92,8 @@ void Cliview::print_board(int curCol)
         }
         cout << endl;
     }
+
+    cout << "step: " << curStep << endl;
 
     cout << "status: ";
     switch(m_modelStat) {

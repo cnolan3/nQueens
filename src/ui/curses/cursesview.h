@@ -12,7 +12,7 @@ class Cursesview
 {
 public:
     std::vector<string> get_command();
-    void update_view(int curCol);
+    void update_view(int curCol, int curStep);
     void update_board(int* board, status modelStat);
     void init_board(int size);
     void invalid_command();

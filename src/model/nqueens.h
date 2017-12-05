@@ -10,9 +10,10 @@ public:
     ~Nqueens();
 
     int size();
-
-    int step();               // take next step in simulation
     int curCol();
+    int curStep();
+
+    void step();               // take next step in simulation
     void print();
 
     int* queens();             // return positions of queens    
@@ -31,6 +32,8 @@ private:
     int m_size;                // number of spaces along each side
 
     int m_last;                // row number of previous iteration
+
+    int m_curStep;             // current step number
 
     status m_status;           // algorithm status
 

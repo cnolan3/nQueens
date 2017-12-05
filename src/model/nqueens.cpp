@@ -31,6 +31,9 @@ Nqueens::Nqueens(int size)
             m_board[i][j] = EMPTY;
         }
     }
+
+    m_last = 0;
+    m_curStep = 0;
 }
 
 /**
@@ -52,14 +55,34 @@ int Nqueens::size()
 }
 
 /**
+ * get current column
+ *
+ * @return    current column
+**/
+int Nqueens::curCol()
+{
+    return m_curCol;
+}
+
+/**
+ * get current step number
+ *
+ * @return    current step
+**/
+int Nqueens::curStep()
+{
+    return m_curStep;
+}
+
+/**
  * take next step in algorithm
  *
  * @return    index of current column
 **/
-int Nqueens::step()
+void Nqueens::step()
 {
     if(m_status != RUNNING)
-        return m_curCol;
+        return;
 
     int i = m_last;
     while(i < m_size) {
@@ -93,17 +116,7 @@ int Nqueens::step()
         }
     }
 
-    return m_curCol;
-}
-
-/**
- * get current column
- *
- * @return    current column
-**/
-int Nqueens::curCol()
-{
-    return m_curCol;
+    m_curStep++;
 }
 
 /**
