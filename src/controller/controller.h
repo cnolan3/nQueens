@@ -1,3 +1,12 @@
+/**
+ * @file    controller.h
+ *
+ * @brief   controller class to mediate between the nQueens model
+ *          and the view.
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __CONTROLLER_H__
 #define __CONTROLLER_H__
 

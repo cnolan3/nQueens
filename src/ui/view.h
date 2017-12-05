@@ -1,3 +1,12 @@
+/**
+ * @file    view.h
+ *
+ * @brief   view pure virtual adapter object. can point ro a CLI view or a
+ *          curese view.
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __VIEW_H__
 #define __VIEW_H__
 

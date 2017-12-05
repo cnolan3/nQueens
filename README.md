@@ -17,8 +17,6 @@ or
 ```
 $ make UI=cli
 ```
-
-***currently not implemented***
 make with ncurses ui
 ```
 $ make UI=curses

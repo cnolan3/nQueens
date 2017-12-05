@@ -1,3 +1,11 @@
+/**
+ * @file    board.h
+ *
+ * @brief   board object used to visualize the many queens board
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __BOARD_H__
 #define __BOARD_H__
 

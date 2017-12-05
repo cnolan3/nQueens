@@ -1,3 +1,11 @@
+/**
+ * @file    cursesview.h
+ *
+ * @brief   view for curses interface
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __CURSESVIEW_H__
 #define __CURSESVIEW_H__
 

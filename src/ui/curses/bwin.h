@@ -1,3 +1,11 @@
+/**
+ * @file    bwin.h
+ *
+ * @brief   window for the board object
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __BWIN_H__
 #define __BWIN_H__
 

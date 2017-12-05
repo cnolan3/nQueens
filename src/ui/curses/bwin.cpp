@@ -1,3 +1,11 @@
+/**
+ * @file    bwin.cpp
+ *
+ * @brief   definition of bwin object
+ *
+ * @author  Connor Nolan
+**/
+
 #include <ncurses.h>
 #include <cstdio>
 #include <panel.h>

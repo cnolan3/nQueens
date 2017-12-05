@@ -1,3 +1,11 @@
+/**
+ * @file    cliview.cpp
+ *
+ * @brief   definition of cliview object
+ *
+ * @suthor  Connor Nolan
+**/
+
 #include <iostream>
 #include <sstream>
 #include <string>

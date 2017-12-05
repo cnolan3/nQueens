@@ -1,3 +1,11 @@
+/**
+ * @file    util.cpp
+ *
+ * @brief   definition of utility functions
+ *
+ * @author  Connor Nolan
+**/
+
 #include "util.h"
 
 void curses_init()

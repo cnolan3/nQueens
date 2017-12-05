@@ -1,3 +1,11 @@
+/**
+ * @file    main.cpp
+ *
+ * @brief   main for nQueens
+ *
+ * @author  Connor Nolan
+**/
+
 #include <iostream>
 
 #include "controller/controller.h"

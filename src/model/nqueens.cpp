@@ -1,3 +1,11 @@
+/**
+ * @file    nqueens.cpp
+ *
+ * @brief   definition of nqueens model
+ *
+ * @author  Connor Nolan
+**/
+
 #include <cstdlib>
 #include <iostream>
 #include <cstdio>

@@ -1,3 +1,11 @@
+/**
+ * @file    board.cpp
+ *
+ * @brief   definition of board object
+ *
+ * @author  Connor Nolan
+**/
+
 #include "board.h"
 
 Board::Board(int width, int height)

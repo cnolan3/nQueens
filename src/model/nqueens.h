@@ -1,3 +1,11 @@
+/**
+ * @file    nqueens.h
+ *
+ * @brief   model for bactracking solution to many queens problem
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __NQUEENS_H__
 #define __NQUEENS_H__
 

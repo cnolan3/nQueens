@@ -1,3 +1,11 @@
+/**
+ * @file    cliview.h
+ *
+ * @brief   view object for the command line interface
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __CLIVIEW_H__
 #define __CLIVIEW_H__
 

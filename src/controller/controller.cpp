@@ -1,3 +1,11 @@
+/**
+ * @file    controller.cpp
+ *
+ * @brief   definition of controller class
+ *
+ * @author  Connor Nolan
+**/
+
 #include "controller.h"
 #include "../ui/view.h"
 #include "../ui/cli/cliview.h"

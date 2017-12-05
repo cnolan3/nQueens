@@ -1,3 +1,11 @@
+/**
+ * @file    cursesview.cpp
+ *
+ * @brief   definition of cursesview object
+ *
+ * @author  Connor Nolan
+**/
+
 #include "cursesview.h"
 
 #include <ncurses.h>

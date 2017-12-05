@@ -1,3 +1,11 @@
+/**
+ * @file    util.h
+ *
+ * @brief   utility functions for nQueens
+ *
+ * @author  Connor Nolan
+**/
+
 #ifndef __UTIL_H__
 #define __UTIL_H__
 
