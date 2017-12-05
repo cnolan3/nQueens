@@ -22,9 +22,8 @@ std::vector<string> Cliview::get_command()
     getline(std::cin, s);
     std::istringstream iss(s);
 
-    while(iss >> tmp) {
+    while(iss >> tmp) 
         sv.push_back(tmp);    
-    }
 
     return sv;
 }

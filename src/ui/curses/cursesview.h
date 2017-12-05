@@ -5,10 +5,13 @@
 #include <vector>
 
 #include "../../util.h"
+#include "../view.h"
+#include "bwin.h"
+#include "../board.h"
 
 using std::string;
 
-class Cursesview
+class Cursesview : public View
 {
 public:
     std::vector<string> get_command();
@@ -17,7 +20,14 @@ public:
     void init_board(int size);
     void invalid_command();
     void intro(int size);
+    void help();
 private:
+
+    BWin* m_bwin;
+
+    Board* m_board;
+
+    status m_modelStat;
 
 };
 
