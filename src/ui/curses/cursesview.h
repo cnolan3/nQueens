@@ -27,7 +27,7 @@ public:
     void update_board(int* board, status modelStat);
     void init_board(int size);
     void invalid_command();
-    void intro(int size);
+    void intro();
     void help();
 private:
 

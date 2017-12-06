@@ -24,12 +24,14 @@ using std::endl;
 Nqueens::Nqueens(int size)
     : m_curCol(0), m_size(size), m_status(RUNNING)
 {
+    // create queens array
     m_queens = new int[m_size];
 
     for(int i = 0; i < m_size; i++) {
         m_queens[i] = -1;
     }
 
+    // create board 2d array
     m_board = new space*[m_size];
 
     for(int i = 0; i < m_size; i++) {
@@ -92,6 +94,7 @@ void Nqueens::step()
     if(m_status != RUNNING)
         return;
 
+    // try to place queen on next available space in column
     int i = m_last;
     while(i < m_size) {
         if(m_board[m_curCol][i] == EMPTY) {

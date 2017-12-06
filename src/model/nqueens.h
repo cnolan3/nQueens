@@ -36,11 +36,8 @@ private:
     };
 
     int m_curCol;              // column currrently being set
-
     int m_size;                // number of spaces along each side
-
     int m_last;                // row number of previous iteration
-
     int m_curStep;             // current step number
 
     status m_status;           // algorithm status

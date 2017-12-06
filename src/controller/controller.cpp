@@ -31,7 +31,8 @@ Controller::Controller(int argc, char* argv[])
 {
     int initSize = 8;
 
-#ifdef CURSESUI
+// if making with curces ui
+#ifdef CURSESUI               
     m_view = new Cursesview();
 
     if(argc > 1) {
@@ -42,6 +43,7 @@ Controller::Controller(int argc, char* argv[])
 
     curses_init();
 
+// if making with cli
 #elif defined(CLI)
     m_view = new Cliview();
 
@@ -60,102 +62,183 @@ Controller::Controller(int argc, char* argv[])
 
     m_model = new Nqueens(initSize);
 
-    running = true;
+    m_running = true;
 
-    m_view->intro(initSize);
+    m_view->intro();
 
     m_speed = 10;
 }
 
+/**
+ * controller destructor
+ *
+ * exits ncurses if compiled with it
+**/
 Controller::~Controller()
 {
-
 #ifdef CURSESUI
     curses_exit();
 #endif
 }
 
+/**
+ * main loop of program
+ *
+ * handles input from view and runs the model
+**/
 void Controller::mainLoop()
 {
     std::vector<string> sv;
     std::vector<string>::iterator it;
 
-    while(running) {
+    while(m_running) {
 
         sv = m_view->get_command();
 
-        it = sv.begin();
+        std::vector<string>::iterator it = sv.begin();
 
         if(it != sv.end()) {
             if(*it == "quit" || *it == "q") 
-                running = false;
+                quit();
             else if(*it == "print" || *it == "p")
-                m_view->update_view(m_model->curCol(), m_model->curStep());
-            else if(*it == "step" || *it == "s") {
-                m_model->step();
-                m_view->update_board(m_model->queens(), m_model->stat());
-                m_view->update_view(m_model->curCol(), m_model->curStep());
-            }
-            else if(*it == "set") {
-                it++;
-                if(it == sv.end()) 
-                    m_view->invalid_command();
-                else {
-                    int size = atoi((*it).c_str());
-
-                    if(size < 1)
-                        m_view->invalid_command();
-                    else {
-
-                        delete m_model;
-                        m_model = new Nqueens(size);
-                        m_view->init_board(size);
-
-                        m_view->update_board(m_model->queens(), m_model->stat());
-                        m_view->update_view(m_model->curCol(), m_model->curStep());
-                    }
-                }
-            }
-            else if(*it == "run" || *it == "r") {
-                while(m_model->stat() == RUNNING) {
-                    m_model->step(); 
-
-                #ifdef CURSESUI
-                    m_view->update_board(m_model->queens(), m_model->stat());
-                    m_view->update_view(m_model->curCol(), m_model->curStep());
-                    usleep(1000 * m_speed);
-                #endif
-                }
-
-                m_view->update_board(m_model->queens(), m_model->stat());
-                m_view->update_view(m_model->curCol(), m_model->curStep());
-            }
-            else if(*it == "reset") {
-                int size = m_model->size();
-
-                delete m_model;
-                m_model = new Nqueens(size);
-                m_view->init_board(size);
-                m_view->update_board(m_model->queens(), m_model->stat());
-                m_view->update_view(m_model->curCol(), m_model->curStep()); 
-            }
-            else if(*it == "speed") {
-                it++;
-                if(it == sv.end())
-                    m_view->invalid_command();
-                else {
-                    int speed = atoi((*it).c_str());
-
-                    if(speed < 0)
-                        m_view->invalid_command();
-                    else
-                        m_speed = speed; 
-                }
-            }
+                print(); 
+            else if(*it == "step" || *it == "s") 
+                step();
+            else if(*it == "set") 
+                set(sv);
+            else if(*it == "run" || *it == "r") 
+                run();
+            else if(*it == "reset") 
+                reset();
+            else if(*it == "speed") 
+                speed(sv); 
             else if(*it == "help" || *it == "h")
-                m_view->help();
+                help();
             else 
-                m_view->invalid_command();
+                invalid_arg();
         }
     }
+}
+
+/**
+ * quit command
+**/
+void Controller::quit()
+{
+    m_running = false;
+}
+
+/**
+ * print command
+**/
+void Controller::print()
+{
+    m_view->update_view(m_model->curCol(), m_model->curStep());
+}
+
+/**
+ * step command
+**/
+void Controller::step()
+{
+    m_model->step();
+    m_view->update_board(m_model->queens(), m_model->stat());
+    m_view->update_view(m_model->curCol(), m_model->curStep());
+}
+
+/**
+ * set command
+ *
+ * @param    sv, vector of command arguments
+**/
+void Controller::set(std::vector<string> &sv)
+{
+    std::vector<string>::iterator it = sv.begin() + 1;
+
+    if(it == sv.end()) 
+        m_view->invalid_command();
+    else {
+        int size = atoi((*it).c_str());
+
+        if(size < 1)
+            m_view->invalid_command();
+        else {
+
+            delete m_model;
+            m_model = new Nqueens(size);
+            m_view->init_board(size);
+
+            m_view->update_board(m_model->queens(), m_model->stat());
+            m_view->update_view(m_model->curCol(), m_model->curStep());
+        }
+    }
+}
+
+/**
+ * run command
+**/
+void Controller::run()
+{
+    while(m_model->stat() == RUNNING) {
+        m_model->step(); 
+
+    #ifdef CURSESUI
+        m_view->update_board(m_model->queens(), m_model->stat());
+        m_view->update_view(m_model->curCol(), m_model->curStep());
+        usleep(1000 * m_speed);
+    #endif
+    }
+
+    m_view->update_board(m_model->queens(), m_model->stat());
+    m_view->update_view(m_model->curCol(), m_model->curStep());
+}
+
+/**
+ * reset command
+**/
+void Controller::reset()
+{
+    int size = m_model->size();
+
+    delete m_model;
+    m_model = new Nqueens(size);
+    m_view->init_board(size);
+    m_view->update_board(m_model->queens(), m_model->stat());
+    m_view->update_view(m_model->curCol(), m_model->curStep()); 
+}
+
+/**
+ * speed command
+ *
+ * @param    sv, vector of command arguments
+**/
+void Controller::speed(std::vector<string> &sv)
+{
+    std::vector<string>::iterator it = sv.begin() + 1;
+    if(it == sv.end())
+        m_view->invalid_command();
+    else {
+        int speed = atoi((*it).c_str());
+
+        if(speed < 0)
+            m_view->invalid_command();
+        else
+            m_speed = speed; 
+    }
+}
+
+/**
+ * help command
+**/
+void Controller::help()
+{
+    m_view->help();
+}
+
+/**
+ * invalid argument
+**/
+void Controller::invalid_arg()
+{
+    m_view->invalid_command();
 }

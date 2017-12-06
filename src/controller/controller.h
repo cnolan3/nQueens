@@ -10,6 +10,11 @@
 #ifndef __CONTROLLER_H__
 #define __CONTROLLER_H__
 
+#include <vector>
+#include <string>
+
+using std::string;
+
 class View;
 class Nqueens;
 
@@ -21,10 +26,21 @@ public:
 
     void mainLoop();
 private:
-    bool running;
-    View* m_view;
-    Nqueens* m_model;
-    int m_speed;
+    // commands
+    void quit();
+    void print();
+    void step();
+    void set(std::vector<string> &sv);
+    void run();
+    void reset();
+    void speed(std::vector<string> &sv);
+    void help();
+    void invalid_arg();
+
+    bool m_running;       // mainloop status
+    View* m_view;         // view
+    Nqueens* m_model;     // nqueens model
+    int m_speed;          // speed of 'run' command
 };
 
 #endif

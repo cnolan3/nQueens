@@ -8,6 +8,9 @@
 
 #include "util.h"
 
+/**
+ * initialize ncurses settings
+**/
 void curses_init()
 {
     initscr();
@@ -19,6 +22,9 @@ void curses_init()
     curs_set(0);
 }
 
+/**
+ * exit ncurses
+**/
 void curses_exit()
 {
     endwin();

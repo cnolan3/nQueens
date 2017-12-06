@@ -15,11 +15,19 @@
 using std::cout;
 using std::endl;
 
+/**
+ * cliview constructor
+**/
 Cliview::Cliview()
 {
     m_modelStat = RUNNING;
 }
 
+/**
+ * get command from cin
+ *
+ * @return    vector of arguments
+**/
 std::vector<string> Cliview::get_command()
 {
     cout << "> ";
@@ -36,11 +44,23 @@ std::vector<string> Cliview::get_command()
     return sv;
 }
 
+/**
+ * update the view
+ *
+ * @param    curCol, current column
+ * @param    curStep, current step number
+**/
 void Cliview::update_view(int curCol, int curStep)
 {
     print_board(curCol, curStep); 
 }
 
+/**
+ * update the board
+ *
+ * @param    board, array of queen positions on board
+ * @param    modelStat, running status of algorithm
+**/
 void Cliview::update_board(int* board, status modelStat)
 {
     m_board->reset();
@@ -53,6 +73,11 @@ void Cliview::update_board(int* board, status modelStat)
     m_modelStat = modelStat;
 }
 
+/**
+ * initialize the view board
+ *
+ * @param    size, size of board
+**/
 void Cliview::init_board(int size)
 {
     if(m_board)
@@ -61,18 +86,27 @@ void Cliview::init_board(int size)
     m_board = new Board(size, size);
 }
 
+/**
+ * invalid command message
+**/
 void Cliview::invalid_command()
 {
     cout << "invalid command, use 'help' to list commands" << endl;
 }
 
-void Cliview::intro(int size)
+/**
+ * intro message
+**/
+void Cliview::intro()
 {
-    cout << size << "x" << size << " board created" << endl;
+    cout << m_board->width() << "x" << m_board->height() << " board created" << endl;
     cout << endl;
     cout << "enter 'help' or 'h' for a list of commands" << endl;
 }
 
+/**
+ * help message
+**/
 void Cliview::help()
 {
     cout << "'quit', 'q'      quit program" << endl;
@@ -83,6 +117,12 @@ void Cliview::help()
     cout << "'print', 'p'     print current board" << endl;
 }
 
+/**
+ * print board to screen
+ *
+ * @param    curCol, current column
+ * @param    curStep, current step number
+**/
 void Cliview::print_board(int curCol, int curStep)
 {
     for(int i = 0; i < curCol; i++) {

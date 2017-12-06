@@ -15,6 +15,11 @@
 #include "bwin.h"
 #include "../board.h"
 
+/**
+ * bwin constructor
+ *
+ * @param    board, view board object
+**/
 BWin::BWin(Board* board)
     : m_board(board), m_origX(0), m_origY(0)
 {
@@ -36,24 +41,37 @@ BWin::BWin(Board* board)
     m_win = newwin(h - 4, w, 0, 0);
 }
 
+/**
+ * bwin destructor
+**/
 BWin::~BWin()
 {
 
 }
 
+/**
+ * draw board on screen
+ *
+ * @param    curCol, current column
+ * @param    curStep, current step number
+ * @param    modelStat, model algorithm status
+**/
 void BWin::draw_board(int curCol, int curStep, status modelStat)
 {
     clear();
 
+    // space color pairs
     int* ca = new int(1);
     int* cb = new int(2);
 
     int* cpairnum = ca;
 
+    // draw spaces in alternating colors
     for(int i = 0; i < m_board->width(); i++) {
 
         for(int j = 0; j < m_board->height(); j++) {
 
+            // set colors for current column
             if(j == curCol) {
                 *ca = 3;
                 *cb = 4;
@@ -63,6 +81,7 @@ void BWin::draw_board(int curCol, int curStep, status modelStat)
                 *cb = 2;
             }
             
+            // switch colors
             if(cpairnum == ca)
                 cpairnum = cb;
             else if(cpairnum == cb)
@@ -77,6 +96,7 @@ void BWin::draw_board(int curCol, int curStep, status modelStat)
             draw_space(j, i, *cpairnum, c);
         }
 
+        // switch colors again if board size is an even number
         if(m_board->width() % 2 == 0) {
             if(cpairnum == ca)
                 cpairnum = cb;
@@ -85,6 +105,7 @@ void BWin::draw_board(int curCol, int curStep, status modelStat)
         }
     }
 
+    // print step number and algorithm status
     mvprintw(m_origY + (m_spaceH * m_board->height()) + 1, m_origX, "step: %d", curStep);
 
     std::string stat;
@@ -108,6 +129,14 @@ void BWin::draw_board(int curCol, int curStep, status modelStat)
     refresh();
 }
 
+/**
+ * draw individual space of board
+ *
+ * @param    x, x coordinate on board
+ * @param    y, y coordinate on board
+ * @param    cpairnum, color pair number
+ * @param    c, character to print on space
+**/
 void BWin::draw_space(int x, int y, int cpairnum, char c)
 {
     attron(COLOR_PAIR(cpairnum));
@@ -115,6 +144,11 @@ void BWin::draw_space(int x, int y, int cpairnum, char c)
     attroff(COLOR_PAIR(cpairnum));
 }
 
+/**
+ * get input from screen
+ *
+ * @return    input string
+**/
 std::string BWin::get_input()
 {
     int h, w;
@@ -123,15 +157,18 @@ std::string BWin::get_input()
     attron(COLOR_PAIR(3));
     curs_set(1);
 
+    // create command prompt bar
     for(int i = 0; i < w; i++) {
         mvprintw(h - 2, i, " ");
     }
 
+    // print command prompt symbol
     mvprintw(h - 2, 3, "> ");
     move(h - 2, 5);
 
     refresh();
 
+    // get user input string
     char s[256];
     getstr(s);
 
