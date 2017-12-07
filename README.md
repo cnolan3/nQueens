@@ -40,4 +40,5 @@ $ make UI=curses
  'set NUM'         create new NUMxNUM board
  'run', 'r'        run from current point until a solution is found
  'step', 's'       move forward on step
+ 'speed NUM'       sets run frame delay to NUM miliseconds (larger number for slower run speed)
  ```

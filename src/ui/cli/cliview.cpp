@@ -54,8 +54,6 @@ command Cliview::get_command(std::vector<string> &args)
             ret = RUN;
         else if(tmp == "reset" || tmp == "rs")
             ret = RESET;
-        else if(tmp == "speed")
-            ret = SPEED;
         else if(tmp == "help" || tmp == "h")
             ret = HELP;
         else
