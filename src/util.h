@@ -17,6 +17,19 @@ enum status {
     FINISHED
 };
 
+enum command {
+    QUIT,
+    PRINT,
+    STEP,
+    SET,
+    RUN,
+    RESET,
+    SPEED,
+    HELP,
+    INVALID_COMMAND,
+    NO_COMMAND
+};
+
 void curses_init();
 void curses_exit();
 

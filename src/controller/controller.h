@@ -35,7 +35,7 @@ private:
     void reset();
     void speed(std::vector<string> &sv);
     void help();
-    void invalid_arg();
+    void invalid_command();
 
     bool m_running;       // mainloop status
     View* m_view;         // view

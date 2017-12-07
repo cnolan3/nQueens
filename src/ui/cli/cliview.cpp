@@ -26,22 +26,46 @@ Cliview::Cliview()
 /**
  * get command from cin
  *
- * @return    vector of arguments
+ * @param     args, vector of command arguments
+ *
+ * @return    command type
 **/
-std::vector<string> Cliview::get_command()
+command Cliview::get_command(std::vector<string> &args)
 {
     cout << "> ";
 
     string s, tmp;
-    std::vector<string> sv;
 
     getline(std::cin, s);
     std::istringstream iss(s);
 
-    while(iss >> tmp) 
-        sv.push_back(tmp);    
+    command ret = NO_COMMAND;
 
-    return sv;
+    if(iss >> tmp) {
+        if(tmp == "quit" || tmp == "q")
+            ret = QUIT;
+        else if(tmp == "print" || tmp == "p")
+            ret = PRINT;
+        else if(tmp == "step" || tmp == "s")
+            ret = STEP;
+        else if(tmp == "set")
+            ret = SET;
+        else if(tmp == "run" || tmp == "r")
+            ret = RUN;
+        else if(tmp == "reset" || tmp == "rs")
+            ret = RESET;
+        else if(tmp == "speed")
+            ret = SPEED;
+        else if(tmp == "help" || tmp == "h")
+            ret = HELP;
+        else
+            ret = INVALID_COMMAND;
+
+        while(iss >> tmp) 
+            args.push_back(tmp);    
+    }
+
+    return ret;
 }
 
 /**

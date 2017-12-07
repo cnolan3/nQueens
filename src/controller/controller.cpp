@@ -89,34 +89,47 @@ Controller::~Controller()
 void Controller::mainLoop()
 {
     std::vector<string> sv;
-    std::vector<string>::iterator it;
+    command c;
 
     while(m_running) {
 
-        sv = m_view->get_command();
+        c = m_view->get_command(sv);
 
-        std::vector<string>::iterator it = sv.begin();
-
-        if(it != sv.end()) {
-            if(*it == "quit" || *it == "q") 
-                quit();
-            else if(*it == "print" || *it == "p")
-                print(); 
-            else if(*it == "step" || *it == "s") 
-                step();
-            else if(*it == "set") 
-                set(sv);
-            else if(*it == "run" || *it == "r") 
-                run();
-            else if(*it == "reset") 
-                reset();
-            else if(*it == "speed") 
-                speed(sv); 
-            else if(*it == "help" || *it == "h")
-                help();
-            else 
-                invalid_arg();
+        switch(c) {
+        case QUIT:
+            quit();
+            break;
+        case PRINT:
+            print();
+            break;
+        case STEP:
+            step();
+            break;
+        case SET:
+            set(sv);
+            break;
+        case RUN:
+            run();
+            break;
+        case RESET:
+            reset();
+            break;
+        case SPEED:
+            speed(sv);
+            break;
+        case HELP:
+            help();
+            break;
+        case INVALID_COMMAND:
+            invalid_command();
+            break;
+        case NO_COMMAND:
+            break;
+        default:
+            break;
         }
+
+        sv.clear();
     }
 }
 
@@ -153,7 +166,7 @@ void Controller::step()
 **/
 void Controller::set(std::vector<string> &sv)
 {
-    std::vector<string>::iterator it = sv.begin() + 1;
+    std::vector<string>::iterator it = sv.begin();
 
     if(it == sv.end()) 
         m_view->invalid_command();
@@ -214,7 +227,8 @@ void Controller::reset()
 **/
 void Controller::speed(std::vector<string> &sv)
 {
-    std::vector<string>::iterator it = sv.begin() + 1;
+    std::vector<string>::iterator it = sv.begin();
+
     if(it == sv.end())
         m_view->invalid_command();
     else {
@@ -238,7 +252,7 @@ void Controller::help()
 /**
  * invalid argument
 **/
-void Controller::invalid_arg()
+void Controller::invalid_command()
 {
     m_view->invalid_command();
 }

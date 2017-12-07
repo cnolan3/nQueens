@@ -21,7 +21,7 @@ using std::string;
 class View
 {
 public:
-    virtual std::vector<string> get_command() = 0;
+    virtual command get_command(std::vector<string> & args) = 0;
     virtual void update_view(int curCol, int curStep) = 0;
     virtual void update_board(int* board, status modelStat) = 0;
     virtual void init_board(int size) = 0;

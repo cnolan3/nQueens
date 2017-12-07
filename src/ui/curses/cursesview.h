@@ -22,7 +22,7 @@ using std::string;
 class Cursesview : public View
 {
 public:
-    std::vector<string> get_command();
+    command get_command(std::vector<string> &args);
     void update_view(int curCol, int curStep);
     void update_board(int* board, status modelStat);
     void init_board(int size);
